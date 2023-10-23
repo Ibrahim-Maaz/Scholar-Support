@@ -14,8 +14,8 @@ export default function Login() {
 
 
   
-  function checkV(volunteer){
-    axios.post('http://localhost:5000/api/volunteer/auth', volunteer)
+  function checkV(student){
+    axios.post('http://localhost:5000/api/student/auth', student)////Now changed volunteer to student so he can sign in
       .then(function (response) {
         console.log(response);
         localStorage.setItem('session',JSON.stringify(response.data.token));
@@ -23,20 +23,21 @@ export default function Login() {
         localStorage.setItem('username',email)
         setLoggedIn(1);
         localStorage.setItem('loggedin',loggedin)
-        window.location.href="/admin"
+        // <Link to="/admin">
+         window.location.href="/admin"
       })
       .catch(function (error) {
         setLoggedIn(0)
         setShow("Invalid Credentials!")
       });
   }
-  function onSubmitVolunteer() {
-      // const volunteer = {
-      //   email: email,
-      //   password: password,
-      // }
-      // checkV(volunteer)
-      window.location.href="/admin"
+  function onSubmitStudent() {
+      const student = {
+        email: email,
+        password: password,
+      }
+      checkV(student)
+      //window.location.href="/admin"
   }
 
 
@@ -140,7 +141,7 @@ export default function Login() {
                   </div>
                   <div className="text-center mt-6">
                     <button
-                      onClick={onSubmitVolunteer}
+                      onClick={onSubmitStudent}
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="button"
                     >

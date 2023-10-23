@@ -1,41 +1,41 @@
-// routes/Volunteer.js
+// routes/Student.js
 const express = require("express");
 const router = express.Router();
-const Volunteer = require("../models/volunteer");
+const Student = require("../models/Student");
 const {
-    getAllVolunteer,
-    postCreateVolunteer,
-    putUpdateVolunteer,
-    deleteVolunteer,
-} = require("../controllers/volunteer");
+    getAllStudent,
+    postCreateStudent,
+    putUpdateStudent,
+    deleteStudent,
+} = require("../controllers/student");
 
 /**
- * @route GET api/Volunteer
- * @description get all Volunteer
+ * @route GET api/Student
+ * @description get all Student
  * @access public
  */
-router.get("/", getAllVolunteer);
+router.get("/", getAllStudent);
 
 /**
- * @route POST api/Volunteer
- * @description add a new Volunteer
+ * @route POST api/Student
+ * @description add a new Student
  * @access public
  */
-router.post("/", postCreateVolunteer);
+router.post("/", postCreateStudent);
 
 /**
- * @route PUT api/Volunteer/:id
- * @description update Volunteer
+ * @route PUT api/Student/:id
+ * @description update Student
  * @access public
  */
-router.put("/:id", putUpdateVolunteer);
+router.put("/:id", putUpdateStudent);
 
 /**
- * @route DELETE api/Volunteer/:id
- * @description delete Volunteer
+ * @route DELETE api/Student/:id
+ * @description delete Student
  * @access public
  */
-router.delete("/:id", deleteVolunteer);
+router.delete("/:id", deleteStudent);
 
 
 //const bcrypt = require ('bcrypt')
@@ -52,7 +52,7 @@ router.post('/auth', async (req, res) => {
     const body = req.body; 
     const email=body.email
     // const password=body.password not useful
-    const user = await Volunteer.findOne({email});//checking in Mongose model that enail is present
+    const user = await Student.findOne({email});//checking in Mongose model that enail is present
     if (user) {
       const Password=user.password//Added on 20-10-23
         //check user password with hashed password stored in the database
@@ -88,31 +88,35 @@ router.post('/signup', async (req, res) => {
     const address = req.body.address
     const institute = req.body.institute
     const phoneNo = req.body.phoneNo
+    const degreeProgram = req.body.degreeProgram
+    const cgpa = req.body.cgpa
     //Validation check for empty fields
     if(!req.body.email || !req.body.password){
         res.status(401).json({message: "Email/password cannot be an empty field"})
     }
     else{
-        //Search 'Volunteer' table for a particular email and throw error if user already exists
-        //else insert into 'Volunteer' table
-        Volunteer.findOne({email:email},function(err,user){
+        //Search 'Student' table for a particular email and throw error if user already exists
+        //else insert into 'Student' table
+        Student.findOne({email:email},function(err,user){
             if(user){
                 //send http error code with message
                 res.status(401).send({message: "User Already Exists!"})
             }
             else{
-                //create new 'Volunteer' object
-                var newVolunteer = new Volunteer({
+                //create new 'Student' object
+                var newStudent = new Student({
                     email:email,
                     password:password,
                     name: name,
                     username: username,
                     address: address,
                     institute: institute,                    
-                    phoneNo: phoneNo   
+                    phoneNo: phoneNo,   
+                    degreeProgram: degreeProgram,
+                    cgpa: cgpa,
                 });
-                //insert into 'Volunteer' table
-                newVolunteer.save((err,doc)=>{
+                //insert into 'Student' table
+                newStudent.save((err,doc)=>{
                     if(err){
                         //send error code if insertion fails
                         res.status(401).send({message: "Error during insertion!"})
@@ -130,7 +134,7 @@ router.post('/signup', async (req, res) => {
 
   router.get('/:email', function (req, res) {
     console.log(req.params.email)
-    Volunteer.findOne({email: req.params.email}, (err, vol) => {
+    Student.findOne({email: req.params.email}, (err, vol) => {
         if (err)
             res.status(400).json({msg:"failed"})
         else
@@ -143,8 +147,8 @@ router.post('/update',async function(req,res){
     const email = req.body.email;
     const address = req.body.address
     const name = req.body.name
-    await Volunteer.findOneAndUpdate({email:email},{address:address})
-    await Volunteer.findOneAndUpdate({email:email},{name:name})
+    await Student.findOneAndUpdate({email:email},{address:address})
+    await Student.findOneAndUpdate({email:email},{name:name})
     res.send({message:"Updated"})
 })
 

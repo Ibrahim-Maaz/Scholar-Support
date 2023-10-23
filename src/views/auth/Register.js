@@ -15,6 +15,8 @@ export default function Register() {
   const [address,setAddress] = useState();  
   const [email,setEmail] = useState();
   const [institute,setInstitute] = useState();
+  const [degreeProgram,setDegreeProgram] = useState();
+  const [cgpa,setCgpa] = useState();
 
 
 
@@ -23,24 +25,27 @@ export default function Register() {
         setShow("Passwords do not match!");
     }
     else{
-            const Volunteer = {
+            const Student = {
                 name: name,
                 email: email,
                 username:username,
                 address:address,
                 institute:institute,
                 password: pass2,
-                phoneno:phoneno
+                phoneno:phoneno,
+                degreeProgram: degreeProgram,
+                cgpa: cgpa,
             }
-            console.log(Volunteer)
-            axios.post('http://localhost:5000/api/volunteer/signup', Volunteer)
+            console.log(Student)
+            axios.post('http://localhost:5000/api/student/signup', Student)
               .then(function (response) {
                   console.log(response);
                   setShow(JSON.stringify(response.data.message));
                   setSuccessful(1);
                   console.log(successful)
-                  localStorage.setItem('email', Volunteer.email)
-                  window.location.assign('http://localhost:3001/ratingspage')
+                  localStorage.setItem('email', Student.email)
+                  window.location.assign('http://localhost:3000/')
+                  // window.location.assign('http://localhost:3001/ratingspage')
               })
               .catch(function (error) {
                   console.log(error)
@@ -199,8 +204,8 @@ export default function Register() {
                       Degree Program
                     </label>
                     <input
-                      value={institute}
-                      onChange={(e)=>{setInstitute(e.target.value)}}
+                      value={degreeProgram}
+                      onChange={(e)=>{setDegreeProgram(e.target.value)}}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Bachelors in ..."
@@ -214,8 +219,8 @@ export default function Register() {
                       Cgpa
                     </label>
                     <input
-                      value={institute}
-                      onChange={(e)=>{setInstitute(e.target.value)}}
+                      value={cgpa}
+                      onChange={(e)=>{setCgpa(e.target.value)}}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Cgpa 1-4"

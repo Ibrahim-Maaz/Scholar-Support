@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {
     getAllReq,
+    getAllReqEmail,
     postCreateReq,
     putUpdateReq,
     deleteReq,
@@ -14,6 +15,14 @@ const {
  * @access public
  */
 router.get("/", getAllReq);
+
+
+/**
+ * @route GET api/todo
+ * @description get all todo
+ * @access public
+ */
+router.get("/:email", getAllReqEmail);
 
 /**
  * @route POST api/todo

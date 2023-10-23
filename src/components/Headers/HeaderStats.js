@@ -6,6 +6,8 @@ import CardStats from "components/Cards/CardStats.js";
 import { Link } from "react-router-dom";
 
 export default function HeaderStats() {
+  // const userEmail = localStorage.getItem('email');
+ 
   return (
     <>
       {/* Header */}
@@ -15,7 +17,15 @@ export default function HeaderStats() {
             {/* Card stats */}
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+                {/* {console.log(userEmail)}; */}
                 <Link to="/search">
+              {/* <Link to={{
+                  pathname: "/search",
+                  state: {
+                    prop1: userEmail // Pass the userEmail as a prop
+                  }
+                }}> */}
+                {/* //request Aid */}
                 <CardStats
                   statSubtitle="Connect with thousands of donors"
                   statTitle="Request New Aid"
@@ -43,7 +53,7 @@ export default function HeaderStats() {
                 </Link>
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
-              <Link to="/pendingAid">
+              <Link to="/pendingAid" >
                 <CardStats
                   statSubtitle="View Requests that are pending"
                   statTitle="Pending Requests"

@@ -1,7 +1,8 @@
 // config/db.js
 const mongoose = require("mongoose");
 
-const db = "mongodb+srv://mrjaffery:VXyEHHudq5iLGvQy@cluster0.g8aer3a.mongodb.net/";
+
+const db = "mongodb+srv://root:root@scholar-support.z8u5r2a.mongodb.net/?retryWrites=true&w=majority";
 
 const connectDB = async () => {
     try {

@@ -1,7 +1,7 @@
-import React from "react";
+import {React,useState,useEffect} from "react";
 
 // components
-
+import axios from "axios";
 import TempCardTable from "components/Cards/TempCardTable.js";
 import CardBarChart from "components/Cards/CardBarChart.js";
 import Sidebar from "components/Sidebar/Sidebar";
@@ -10,6 +10,21 @@ import CardStats from "components/Cards/CardStats";
 import PendingTable from "components/SS/PendingTable"
 import { Link } from "react-router-dom";
 export default function Tables() {
+  const emailPending = localStorage.getItem('email');
+  const [requestData, setRequestData] = useState([]);
+
+  useEffect(() => {
+    // Make an API request using axios when the component mounts
+    // axios.get(`http://localhost:5000/api/req/${email}`)
+    axios
+    .get(`http://localhost:5000/api/req/${emailPending}`)
+      .then((response) => {
+        setRequestData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
   return (
     <>
         <Sidebar/>
@@ -40,7 +55,8 @@ export default function Tables() {
         <div className="flex flex-wrap mt-4">      
       
         <div className="w-full mb-12 px-4">
-          <PendingTable color="dark" />
+          
+          <PendingTable requestData={requestData} color="dark" />
         </div>
       </div>
       </div>
