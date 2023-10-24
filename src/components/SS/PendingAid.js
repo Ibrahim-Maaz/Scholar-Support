@@ -13,11 +13,13 @@ export default function Tables() {
   const emailPending = localStorage.getItem('email');
   const [requestData, setRequestData] = useState([]);
 
+  const countFromLocalStorage = parseInt(localStorage.getItem("count"));//sa
+
   useEffect(() => {
     // Make an API request using axios when the component mounts
     // axios.get(`http://localhost:5000/api/req/${email}`)
     axios
-    .get(`http://localhost:5000/api/req/${emailPending}`)
+    .get(`http://localhost:5000/api/req/${emailPending}?verified=pending`)
       .then((response) => {
         setRequestData(response.data);
       })
@@ -39,7 +41,7 @@ export default function Tables() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Requests Pending"
-                  statTitle="1"
+                  statTitle={countFromLocalStorage}
                   statArrow=""
                   statPercent=""
                   statPercentColor=""

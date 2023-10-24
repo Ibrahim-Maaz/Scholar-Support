@@ -25,7 +25,7 @@ const ReqSchema = new mongoose.Schema({
     verified: {
              type: String,
         // enum: ['Pending', 'Approved'],
-        // default:'Pending'
+        default:'Pending'
         // type: Boolean,
     },
 

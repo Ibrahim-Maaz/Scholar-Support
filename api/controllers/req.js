@@ -11,21 +11,41 @@ exports.getAllReq = (req, res) => { //to get all req
         );
 };
 
-exports.getAllReqEmail = (req, res) => { //to get all for a particular email
-    const emailParam = req.params.email;
 
-    REQ.find({ email: emailParam })
-    .then((reqData) => {
+exports.getAllReqEmail = (req, res) => {
+    const emailParam = req.params.email;
+    const { verified } = req.query;
+  
+    const query = { email: emailParam, verified: verified };
+  
+    REQ.find(query)
+      .then((reqData) => {
         if (reqData.length === 0) {
-            res.status(404).json({ message: `REQ not found for email: ${emailParam}` });
+          res.status(404).json({ message: `REQ not found for email: ${emailParam} and verified: ${verified}` });
         } else {
-            res.json(reqData);
+          res.json(reqData);
         }
-    })
-    .catch((err) =>
-        res.status(500).json({ message: "Internal server error", error: err.message })
-    );
-};
+      })
+      .catch((err) =>
+        res.status(500).json({ message: "Internal server error", error: err.message })
+      );
+  };
+
+// exports.getAllReqEmail = (req, res) => { //to get all for a particular email
+//     const emailParam = req.params.email;
+
+//     REQ.find({ email: emailParam })
+//     .then((reqData) => {
+//         if (reqData.length === 0) {
+//             res.status(404).json({ message: `REQ not found for email: ${emailParam}` });
+//         } else {
+//             res.json(reqData);
+//         }
+//     })
+//     .catch((err) =>
+//         res.status(500).json({ message: "Internal server error", error: err.message })
+//     );
+// };
 exports.postCreateReq = (req, res) => {
     //variable can be declare here
 

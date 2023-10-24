@@ -14,6 +14,7 @@ export default function CardSettings() {
   const [msg, setMsg] = useState('');
   const [requestType, setRequestType] = useState('');
   const [verified, setVerified] = useState('pending');
+  // const [verified, setVerified] = useState('');
   const handleDropdownChange = (e) => {
     const selectedValue = e.target.value;
     setRequestType(selectedValue);
@@ -36,6 +37,7 @@ export default function CardSettings() {
       .then((response) => {
         // Handle the response, e.g., set a success message in state
         setMsg('Request submitted successfully to Server.');
+        // setVerified()
       })
       .catch((error) => {
         // Handle any errors, e.g., set an error message in state

@@ -1,4 +1,4 @@
-import React from "react";
+import {React,useState,useEffect} from "react";
 import PropTypes from "prop-types";
 
 // components
@@ -7,7 +7,20 @@ import TableDropdown from "components/Dropdowns/TableDropdown.js";
 
 export default function CardTable({ color,requestData }) {
 
- 
+//  const [count,setCount]=useState('')
+ let maplist=0;
+
+//  const count = localStorage.getItem('count');
+const [count, setCount] = useState(
+  parseInt(localStorage.getItem("count")) || 0
+);
+
+   // Update count when requestData changes
+   useEffect(() => {
+    setCount(requestData.length);
+    // Save the count in local storage
+    localStorage.setItem("count", count.toString());
+  }, [requestData, count]);
   return (
     <>
       <div
@@ -131,7 +144,8 @@ export default function CardTable({ color,requestData }) {
               </tr>
             </thead>
             <tbody>
-            {requestData.map((item) => (
+              {/* {const count=requestData} */}
+            { maplist =requestData.map((item) => (
             <tr key={item.id}>
               <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   {item.amount}
@@ -142,11 +156,14 @@ export default function CardTable({ color,requestData }) {
               <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
               {item.verified}
               </td>
-            
+              {/* { setCount(maplist.length)}
+              {console.log(count)} */}
             {/* Render other data fields here */}
           </tr>
+           
         ))}
-
+            {/* {setCount(maplist.length)} */}
+              {console.log(count)} 
 
               {/* <tr>
                 
