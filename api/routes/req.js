@@ -29,6 +29,8 @@ router.post("/", postCreateReq);
  */
 router.put("/:id", putUpdateReq);
 
+// router.put("/:id", putUpdateReqReject);
+
 /**
  * @route DELETE api/todo/:id
  * @description delete todo

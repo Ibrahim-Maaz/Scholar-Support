@@ -8,15 +8,16 @@ export default function CardSettings() {
   const [contact,SetContact] = useState()
   const [address,setAddress] = useState()
   const [show,setShow] = useState()
-  async function insertOrg(){
-    const ngo ={
+  async function insertAdmin(){
+    const admin ={
       name:name,
       password:password,
       contact:contact,
       address:address
     }
-    console.log(ngo.contact)
-    const res = await axios.post('http://localhost:5000/api/ngo',ngo)
+    console.log(admin.contact)
+    console.log(admin)
+    const res = await axios.post('http://localhost:5000/api/admin',admin)
     if(res){
       setShow(1)
     }
@@ -32,7 +33,7 @@ export default function CardSettings() {
 
             <h6 className="text-blueGray-700 text-xl font-bold">Register Admin</h6>
             <button
-            onClick={insertOrg}
+            onClick={insertAdmin}
               className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
               type="button"
             >

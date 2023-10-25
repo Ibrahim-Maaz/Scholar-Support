@@ -26,8 +26,10 @@ exports.putUpdateReq = (req, res) => {
 
     REQ.findByIdAndUpdate(
       req.params.id,
-      { Verified: true },
-      { new: true }
+      { verified: "approved" },
+    // console.log(req.body.verified),
+    //   console.log(req.body.verified),
+      { new: true }//indicates that you want to receive the updated document as the result of the update operation.
     )
       .then((data) => res.json({ message: "Updated successfully", data }))
       .catch((err) =>
@@ -36,6 +38,22 @@ exports.putUpdateReq = (req, res) => {
           .json({ message: "Failed to update req", error: err.message })
       );
   };
+
+//   exports.putUpdateReqReject = (req, res) => {
+    
+
+//     REQ.findByIdAndUpdate(
+//       req.params.id,
+//       { verified: "rejected" },
+//       { new: true }//indicates that you want to receive the updated document as the result of the update operation.
+//     )
+//       .then((data) => res.json({ message: "Updated successfully", data }))
+//       .catch((err) =>
+//         res
+//           .status(400)
+//           .json({ message: "Failed to update req", error: err.message })
+//       );
+//   };
 
 exports.deleteReq = (req, res) => {
     REQ.findByIdAndRemove(req.params.id, req.body)
