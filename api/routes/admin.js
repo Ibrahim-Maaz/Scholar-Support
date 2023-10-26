@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 const Admin = require("../models/Admin.js");
 const NGO = require("../models/ngo.js")
+
+const ApprovedReq = require("../models/ApprovedReq.js")
 //const bcrypt = require ('bcrypt')
 //const jwt = require("jsonwebtoken")
 
@@ -32,17 +34,15 @@ router.post('/', async (req, res) => {
 
 
 router.post('/addOrg',async(req,res)=>{
-  const email = req.body.email
-  const password = req.body.password
-  const contact = req.body.contact
-  const address = req.body.address
-  //NGO.create(req,body)
-  //.then((data)=>res.json({message:"NGO added successfully",data}))
-  //.catch((err)=>res.status(400).json({message:"Failed to add NGO",error:err.message}));
+  console.log(req.body)
+  NGO.create(req.body)
+  .then((data)=>res.json({message:"NGO added successfully",data}))
+  .catch((err)=>res.status(400).json({message:"Failed to add NGO",error:err.message}));
 })
 
-router.post('/delOrg',async(req,res)=>{
-  NGO.deleteMany({name:req.body.email})
+router.post('/delOrg',async (req,res)=>{
+  console.log(req.body)
+  await NGO.deleteMany({name:req.body.email})
         .then((data) =>
             res.json({ message: "ngo deleted successfully", data })
         )

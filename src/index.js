@@ -22,6 +22,11 @@ import Jobsel from "new/Jobsel.js";
 import RequestAid from "./components/SS/RequestWrapper.js"
 import PendingRequests from "./components/SS/PendingAid.js"
 import EditProfile from "./views/admin/Settings.js"
+import DonorLogin from "./components/SS/Login.js"
+import Donor from "./components/SS/LoginWrapper.js"
+import DonorDashboard from "./components/SS/Donor.js"
+import DonorHome from "./components/SS/DonorHome.js"
+import DonorRegister from "./components/SS/SignupWrapper.js"
 
 ReactDOM.render(
   <BrowserRouter>
@@ -34,6 +39,11 @@ ReactDOM.render(
       <Route path="/RegisterJob" exact component={AddJob}/>
       <Route path="/landing" exact component={Landing} />
       <Route path="/profile" exact component={Profile} />
+      <Route path ="/donor" exact component={Donor}/>
+      <Route path="/donor/login" exact component={DonorLogin} />
+      <Route path="/donor/dashboard" exact component={DonorDashboard}/>
+      <Route path="/donor/register" exact component={DonorRegister}/>
+      <Route path="/donor/home" exact component={DonorHome}/>
       <Route path="/" exact component={Landing} />
       <Route path="/editProfile" exact component={EditProfile} />
       <Route path="/search" exact component={RequestAid}></Route>
