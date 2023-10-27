@@ -1,11 +1,40 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {useState,useEffect} from "react";
+
+import axios from "axios";
+
 
 // components
 
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 
 export default function CardTable({ color }) {
+
+
+
+  const [requestData, setRequestData] = useState([]);
+
+  const emailPending = localStorage.getItem('email');
+
+
+  useEffect(() => {
+    fetchData()
+  }, []);
+
+  const fetchData = () => {
+    // Make an API request using axios when the component mounts
+    // axios.get(`http://localhost:5000/api/req/${email}`)
+    axios
+    .get(`http://localhost:5000/api/req/${emailPending}?verified=approved`)//i am showing only approved ones here
+    // .get(`http://localhost:5000/api/req`)
+      .then((response) => {
+        setRequestData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }
   return (
     <>
       <div
@@ -51,7 +80,7 @@ export default function CardTable({ color }) {
                       : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
                   }
                 >
-                  Donor
+                  Email
                 </th>
                 <th
                   className={
@@ -61,7 +90,7 @@ export default function CardTable({ color }) {
                       : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
                   }
                 >
-                  Amount Provided
+                  Type
                 </th>
                 <th
                   className={
@@ -71,7 +100,7 @@ export default function CardTable({ color }) {
                       : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
                   }
                 >
-                  Date
+                  Amount
                 </th>
                 <th
                   className={
@@ -90,48 +119,48 @@ export default function CardTable({ color }) {
                       ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                       : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
                   }
+                >
+                  Document
+                </th>
+                <th
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                  }
                 ></th>
               </tr>
             </thead>
             <tbody>
+            {requestData.map((item) => (
+            <tr key={item.id}>
+              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  {item.email}
+              </td>
+              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  {item.requestType}
+              </td>
+              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  {item.amount}
+              </td>
+              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+              {item.verified}
+              </td>
+              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+              {item.supportingdoc}
+              </td>
+            
+            {/* Render other data fields here */}
+          
+               
+               
               
-              <tr>
-                {/* <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                  <img
-                    src={require("assets/img/5.jpg").default}
-                    className="h-12 w-12 bg-white rounded-full border"
-                    alt="..."
-                  ></img>{" "}
-                  <span
-                    className={
-                      "ml-3 font-bold " +
-                      +(color === "light" ? "text-blueGray-600" : "text-white")
-                    }
-                  >
-                    Atif Ali 
-                  </span>
-                </th> */}
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    Atif Ali
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  2000
-                </td>
-                {/* <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  Approved
-                </td> */}
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                12/11/2022
-                </td>
-                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                Approved
-                </td>
-                {/* <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                  <TableDropdown />
-                </td> */}
+                
               </tr>
-              
-              
+             
+              ))}
+               {/* copied from one line above these brackets */}
             </tbody>
           </table>
         </div>

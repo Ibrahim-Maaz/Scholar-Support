@@ -1,5 +1,7 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
+import {useState,useEffect} from "react";
+import axios from "axios";
 
 // components
 
@@ -47,25 +49,63 @@ export default function DonorHome() {
     width:"64px",
     height:"32px"
   };
+
+
+
+    const [requestData, setRequestData] = useState([]);
+
+  useEffect(() => {
+    fetchData()
+  }, []);
+
+  const fetchData = () => {
+    // Make an API request using axios when the component mounts
+    // axios.get(`http://localhost:5000/api/req/${email}`)
+    axios
+    // .get(`http://localhost:5000/api/req`)
+    .get(`http://localhost:5000/api/req/?`)
+      .then((response) => {
+        setRequestData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }
   return (
     <>       
-    <Sidebar />
-      <div className=" md:ml-64 bg-blueGray-100 flex flex-col items-center">
-      <div className="py-5 text-xl font-semibold mx-auto">Donors Feed</div>
-      <div className="flex flex-col">
-      <div className="flex mb-12">
-  <div className="px-6" style={cardItemStyle}>
-  <div className="text-center mt-5">
-    <h2 className="text-xl font-bold text-gray-800">John Doe</h2>
-    <p className="text-sm text-gray-600">FAST University</p>
-    <p className="text-lg font-semibold text-blue-500 mt-2">3.49</p>
-    <p className="text-lg font-semibold text-blue-500 mt-2">Computer Science</p>
-    <p className="text-lg font-semibold text-blue-500 mt-2">Rs.12000</p>
-    <p className="text-lg font-semibold text-blue-500 mt-2">University Fee Payment</p>
-    <div className="mx-auto mt-2 text-center" style={buttonItemStyle}>Donate</div>
-    <div className="mx-auto mt-2 text-center" style={OrangebuttonItemStyle}>Email</div>
-  </div>
-  </div>
+    return (
+    <div>
+      <Sidebar />
+      <div className="md:ml-64 bg-blueGray-100 flex flex-col items-center">
+        <div className="py-5 text-xl font-semibold mx-auto">Donors Feed</div>
+        <div className="flex flex-col">
+          {requestData.map((item, index) => (
+            <div key={index} className="flex mb-12">
+              <div style={cardItemStyle} className="px-6">
+                <div className="text-center mt-5">
+                  <h2 className="text-xl font-bold text-gray-800">{item.email}</h2>
+                  <p className="text-sm text-gray-600">{item.requestType}</p>
+                  <p className="text-lg font-semibold text-blue-500 mt-2">Amount: {item.amount}</p>
+                  <p className="text-lg font-semibold text-blue-500 mt-2">{item.verified}</p>
+                  <p className="text-lg font-semibold text-blue-500 mt-2">Cgpa: {item.cgpa}</p>
+                  <p className="text-lg font-semibold text-blue-500 mt-2">{item.supportingdoc}</p>
+                  <div className="mx-auto mt-2 text-center" style={buttonItemStyle}>
+                    Donate
+                  </div>
+                  <div className="mx-auto mt-2 text-center" style={OrangebuttonItemStyle}>
+                    Email
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+{/* } */}
+{/* 
+
   <div className="px-6" style={cardItemStyle}>
   <div className="text-center mt-5">
     <h2 className="text-xl font-bold text-gray-800">John Doe</h2>
@@ -167,7 +207,7 @@ export default function DonorHome() {
   </div>
   </div>
 </div>
-</div>
+</div> */}
         {/* <div className="mx-auto w-full h-96">
             <div class="flex flex-col items-center py-10">
             <div class="py-5 text-xl font-semibold">Donors Feed</div>
@@ -213,9 +253,9 @@ export default function DonorHome() {
          
         </div> */}
         
-      </div>
+      {/* </div> */}
       <FooterAdmin class="mt-28"/>
-    </>
+//     </>
 
 
 

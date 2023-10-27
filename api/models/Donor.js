@@ -10,6 +10,8 @@ const donorSchema = new mongoose.Schema({
     address: String,
     institute: String,
     phoneNo: String,
+    
+    
 }) 
 //Table definition for Donor
 const Donor = new mongoose.model("Donor", donorSchema)

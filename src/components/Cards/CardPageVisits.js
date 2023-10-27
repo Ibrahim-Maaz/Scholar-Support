@@ -55,7 +55,7 @@ export default function CardPageVisits() {
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>
-                  Approved
+                  approved
                 </td>
               </tr>
               <tr>
@@ -66,11 +66,11 @@ export default function CardPageVisits() {
                   3,985
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  319
+                1/11/2023
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   <i className="fas fa-arrow-down text-orange-500 mr-4"></i>
-                  46,53%
+                  approved
                 </td>
               </tr>
               <tr>
@@ -81,11 +81,11 @@ export default function CardPageVisits() {
                   3,513
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  294
+                12/11/2021
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   <i className="fas fa-arrow-down text-orange-500 mr-4"></i>
-                  36,49%
+                  approved
                 </td>
               </tr>
               <tr>
@@ -96,11 +96,11 @@ export default function CardPageVisits() {
                   2,050
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  147
+                12/11/2022
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   <i className="fas fa-arrow-up text-emerald-500 mr-4"></i>
-                  50,87%
+                  approved
                 </td>
               </tr>
               <tr>
@@ -111,11 +111,11 @@ export default function CardPageVisits() {
                   1,795
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                  190
+                12/11/2022
                 </td>
                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                   <i className="fas fa-arrow-down text-red-500 mr-4"></i>
-                  46,53%
+                  approved
                 </td>
               </tr>
             </tbody>

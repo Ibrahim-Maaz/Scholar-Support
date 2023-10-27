@@ -13,7 +13,8 @@ export default function Tables() {
   const emailPending = localStorage.getItem('email');
   const [requestData, setRequestData] = useState([]);
 
-  const countFromLocalStorage = parseInt(localStorage.getItem("count"));//sa
+  // const countFromLocalStorage = parseInt(localStorage.getItem("count"));//sa
+  const [countFromLocalStorage, setCountFromLocalStorage] = useState(0);
 
   useEffect(() => {
     // Make an API request using axios when the component mounts
@@ -26,7 +27,13 @@ export default function Tables() {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+      // Retrieve the count from local storage
+    const storedCount = localStorage.getItem("count");
+    if (storedCount) {
+      setCountFromLocalStorage(parseInt(storedCount, 10));
+    }
+
+  }, [emailPending]);
   return (
     <>
         <Sidebar/>

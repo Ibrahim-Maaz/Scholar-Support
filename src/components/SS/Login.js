@@ -14,8 +14,8 @@ export default function Login() {
 
 
   
-  function checkV(volunteer){
-    axios.post('http://localhost:5000/api/volunteer/auth', volunteer)
+  function checkV(donor){
+    axios.post('http://localhost:5000/api/donor/auth', donor)
       .then(function (response) {
         console.log(response);
         localStorage.setItem('session',JSON.stringify(response.data.token));
@@ -23,20 +23,21 @@ export default function Login() {
         localStorage.setItem('username',email)
         setLoggedIn(1);
         localStorage.setItem('loggedin',loggedin)
-        window.location.href="/admin"
+        // window.location.href="/admin"
+        window.location.href="/donor/home"
       })
       .catch(function (error) {
         setLoggedIn(0)
         setShow("Invalid Credentials!")
       });
   }
-  function onSubmitVolunteer() {
-      // const volunteer = {
-      //   email: email,
-      //   password: password,
-      // }
-      // checkV(volunteer)
-      window.location.href="/donor/home"
+  function onSubmitdonor() {
+      const donor = {
+        email: email,
+        password: password,
+      }
+      checkV(donor)
+    //   window.location.href="/donor/home"
   }
 
 
@@ -140,7 +141,7 @@ export default function Login() {
                   </div>
                   <div className="text-center mt-6">
                     <button
-                      onClick={onSubmitVolunteer}
+                      onClick={onSubmitdonor}
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="button"
                     >

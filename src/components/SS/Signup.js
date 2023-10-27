@@ -23,7 +23,7 @@ export default function Signup() {
         setShow("Passwords do not match!");
     }
     else{
-            const Volunteer = {
+            const Donor = {
                 name: name,
                 email: email,
                 username:username,
@@ -32,15 +32,16 @@ export default function Signup() {
                 password: pass2,
                 phoneno:phoneno
             }
-            console.log(Volunteer)
-            axios.post('http://localhost:5000/api/volunteer/signup', Volunteer)
+            console.log(Donor)
+            axios.post('http://localhost:5000/api/donor/signup', Donor)
               .then(function (response) {
                   console.log(response);
                   setShow(JSON.stringify(response.data.message));
                   setSuccessful(1);
                   console.log(successful)
-                  localStorage.setItem('email', Volunteer.email)
-                  window.location.assign('http://localhost:3001/ratingspage')
+                  localStorage.setItem('email', Donor.email)
+                  window.location.assign('http://localhost:3000/')
+                //   window.location.assign('http://localhost:3001/ratingspage')
               })
               .catch(function (error) {
                   console.log(error)

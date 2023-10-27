@@ -1,12 +1,38 @@
-/eslint-disable/
-import React from "react";
+// /eslint-disable/
+// import React from "react";
+// import { Link } from "react-router-dom";
+
+import React from 'react';
+// import {useState,useEffect} from "react";
 import { Link } from "react-router-dom";
+// import axios from "axios";
 
 import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
 import UserDropdown from "components/Dropdowns/UserDropdown.js";
 
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
+
+
+//   const [requestData, setRequestData] = useState([]);
+
+//   useEffect(() => {
+//     fetchData()
+//   }, []);
+
+//   const fetchData = () => {
+//     // Make an API request using axios when the component mounts
+//     // axios.get(`http://localhost:5000/api/req/${email}`)
+//     axios
+//     .get(`http://localhost:5000/api/req/`)
+//       .then((response) => {
+//         setRequestData(response.data);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching data:", error);
+//       });
+//   }
+
   return (
     <>
       <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
