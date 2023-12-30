@@ -28,6 +28,8 @@ import DonorDashboard from "./components/SS/Donor.js"
 import DonorHome from "./components/SS/DonorHome.js"
 import DonorRegister from "./components/SS/SignupWrapper.js"
 import DonorAid from "./components/SS/DonorAidWrapper.js"
+import PrevAids from "./components/SS/PrevAids.js"
+import StudentDonorAids from "components/SS/StudentDonorAids.js";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -46,6 +48,8 @@ ReactDOM.render(
       <Route path="/donor/register" exact component={DonorRegister}/>
       <Route path="/donor/home" exact component={DonorHome}/>
       <Route path="/donor/aid" exact component={DonorAid}/>
+      <Route path="/donor/prevaid" exact component={PrevAids}/>
+      <Route path="/studentdonoraids" exact component={StudentDonorAids}/>
       <Route path="/" exact component={Landing} />
       <Route path="/editProfile" exact component={EditProfile} />
       <Route path="/search" exact component={RequestAid}></Route>
