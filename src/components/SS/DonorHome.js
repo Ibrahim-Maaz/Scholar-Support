@@ -65,6 +65,7 @@ export default function DonorHome() {
     // .get(`http://localhost:5000/api/req`)
     .get(`http://localhost:5000/api/req/?`)
       .then((response) => {
+        console.log('the response is ', response.data)
         setRequestData(response.data);
       })
       .catch((error) => {
