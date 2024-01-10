@@ -33,7 +33,24 @@ export default function CardSettings() {
       verified 
     };
     console.log(requestData);
-    axios.post('http://localhost:5000/api/req/', requestData)
+
+    const formData = new FormData();
+
+    // Append other form fields to the formData
+    formData.append('email', email);
+    formData.append('amount', amount);
+    formData.append('requestType', requestType);
+    formData.append('cgpa', cgpa);
+    formData.append('phoneno', phoneno);
+    formData.append('verified', verified);
+  
+    // Append the supportingdoc (file) to the formData
+    formData.append('supportingdoc', supportingdoc); // 'supportingdocfFile' is the name attribute from the frontend form input
+    axios.post('http://localhost:5000/api/req/', formData,{
+      headers: {
+        'Content-Type': 'multipart/form-data', // Set proper headers for form data
+      },
+    })
       .then((response) => {
         // Handle the response, e.g., set a success message in state
         setMsg('Request submitted successfully to Server.');
@@ -86,9 +103,9 @@ export default function CardSettings() {
                   value={requestType} // 5. Use the state variable to set the value of the select element.
                   onChange={handleDropdownChange} // 4. Bind the event handler to the onChange event.
                   >
-                    <option>Option A</option>
-                    <option>Option B</option>
-                    <option>Option C</option>
+                    <option>Aid</option>
+                    <option>Loan</option>
+                    <option>Research Grant</option>
                   </select>
                 </div>
               </div>
@@ -135,7 +152,11 @@ export default function CardSettings() {
                   >
                     Supporting Docs
                   </label>
-                  <input type="file" id="supportingDocument" name="supportingDocument" accept=".pdf, .doc, .docx" className="mt-2" />
+                  <input 
+                  onChange={(e)=>{setSupportDoc(e.target.value)}}
+                  type="file" id="supportingDocument" name="supportingDocument" accept=".pdf, .doc, .docx" className="mt-2" 
+                  value={supportingdoc}
+                  />
                 </div>
               </div>
             </div>

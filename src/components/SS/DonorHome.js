@@ -72,7 +72,12 @@ export default function DonorHome() {
         console.error("Error fetching data:", error);
       });
   }
-  return (
+
+  const handleEmailClick = (email) => {//to open new page to email student
+    window.location.href = `mailto:${email}`;
+  };
+
+  return (//return for donor home
     <>       
     return (
     <div>
@@ -90,10 +95,10 @@ export default function DonorHome() {
                   <p className="text-lg font-semibold text-blue-500 mt-2">{item.verified}</p>
                   <p className="text-lg font-semibold text-blue-500 mt-2">Cgpa: {item.cgpa}</p>
                   <p className="text-lg font-semibold text-blue-500 mt-2">{item.supportingdoc}</p>
-                  <div className="mx-auto mt-2 text-center" style={buttonItemStyle}>
+                  <div className="mx-auto mt-2 text-center" style={buttonItemStyle} >
                     Donate
                   </div>
-                  <div className="mx-auto mt-2 text-center" style={OrangebuttonItemStyle}>
+                  <div className="mx-auto mt-2 text-center" style={OrangebuttonItemStyle} onClick={() => handleEmailClick(item.email)}>
                     Email
                   </div>
                 </div>
