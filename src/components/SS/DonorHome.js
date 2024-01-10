@@ -2,6 +2,8 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import {useState,useEffect} from "react";
 import axios from "axios";
+import Modal from "./Modal.js";
+
 
 // components
 
@@ -53,6 +55,7 @@ export default function DonorHome() {
 
 
     const [requestData, setRequestData] = useState([]);
+    const [modalOpen, setModalOpen] = useState(false); 
 
   useEffect(() => {
     fetchData()
@@ -60,18 +63,31 @@ export default function DonorHome() {
 
   const fetchData = () => {
     // Make an API request using axios when the component mounts
-    // axios.get(`http://localhost:5000/api/req/${email}`)
+    // axios.get(http://localhost:5000/api/req/${email})
     axios
-    // .get(`http://localhost:5000/api/req`)
+    
     .get(`http://localhost:5000/api/req/?`)
       .then((response) => {
         console.log('the response is ', response.data)
-        setRequestData(response.data);
+        const optionAArray = response.data.filter(item => item.requestType === "Option A");
+        const otherRequestArray = response.data.filter(item => item.requestType !== "Option A");
+  
+        // Sort both arrays based on CGPA in descending order
+        const sortedOptionAArray = optionAArray.sort((a, b) => parseFloat(b.cgpa) - parseFloat(a.cgpa));
+        const sortedOtherRequestArray = otherRequestArray.sort((a, b) => parseFloat(b.cgpa) - parseFloat(a.cgpa));
+  
+        // Concatenate the sorted arrays
+        const sortedData = sortedOptionAArray.concat(sortedOtherRequestArray);
+  
+        console.log(sortedData);
+  
+          setRequestData(sortedData);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
   }
+
 
   const handleEmailClick = (email) => {//to open new page to email student
     window.location.href = `mailto:${email}`;
@@ -95,9 +111,12 @@ export default function DonorHome() {
                   <p className="text-lg font-semibold text-blue-500 mt-2">{item.verified}</p>
                   <p className="text-lg font-semibold text-blue-500 mt-2">Cgpa: {item.cgpa}</p>
                   <p className="text-lg font-semibold text-blue-500 mt-2">{item.supportingdoc}</p>
-                  <div className="mx-auto mt-2 text-center" style={buttonItemStyle} >
+                  <button className="mx-auto mt-2 text-center" style={buttonItemStyle} onClick={()=>{
+                        setModalOpen(true);
+                      }}> 
                     Donate
-                  </div>
+                  </button>
+
                   <div className="mx-auto mt-2 text-center" style={OrangebuttonItemStyle} onClick={() => handleEmailClick(item.email)}>
                     Email
                   </div>
@@ -106,6 +125,8 @@ export default function DonorHome() {
             </div>
           ))}
         </div>
+        {modalOpen && <Modal setOpenModal={setModalOpen} />}
+
       </div>
     </div>
   );

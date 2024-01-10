@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 export default function Login() {
 
-  
+  //changed on line 160
 
 
   const [password, setPassword] = useState();
@@ -157,6 +157,7 @@ export default function Login() {
                 <a
                   href="#pablo"
                   onClick={(e) => e.preventDefault()}
+                  // onClick={handleClick} // Attach the onClick event handler
                   className="text-blueGray-200"
                 >
                   <small>Forgot password?</small>

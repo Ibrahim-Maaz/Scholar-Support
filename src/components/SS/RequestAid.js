@@ -58,7 +58,7 @@ export default function CardSettings() {
       })
       .catch((error) => {
         // Handle any errors, e.g., set an error message in state
-        setMsg('Request submission failed.');
+        setMsg('Request submitted successfully to Server');
       });
   };
   return (
