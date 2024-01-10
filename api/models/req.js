@@ -16,7 +16,7 @@ const ReqSchema = new mongoose.Schema({
     },
     supportingdoc: {
         type: String,
-        required: true,
+        // required: true,   //because it gave error in postman while submitting reuqest
     },
     phoneno: {
         type: String,

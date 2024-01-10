@@ -9,6 +9,8 @@ const {
     deleteReq,
 } = require("../controllers/req");
 
+const upload =require('../middleware/upload')//change made here
+
 /**
  * @route GET api/todo
  * @description get all todo
@@ -29,7 +31,8 @@ router.get("/:email", getAllReqEmail);
  * @description add a new todo
  * @access public
  */
-router.post("/", postCreateReq);
+router.post("/", upload.single('supportingdoc'),postCreateReq);//change made here
+// router.post("/",postCreateReq);//change made here
 
 /**
  * @route PUT api/todo/:id

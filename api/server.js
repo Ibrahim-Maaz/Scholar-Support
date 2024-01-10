@@ -7,6 +7,9 @@ const connectDB = require("./config/db");
 const app = express();
 const cors = require("cors")
 app.use(cors());
+
+app.use("/uploads",express.static("uploads"))
+
 // routes
 const volunteer = require("./routes/volunteer"); // added
 const enrolled = require("./routes/Enrolled");
