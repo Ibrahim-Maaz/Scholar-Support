@@ -1,4 +1,23 @@
 import React from "react";
+import axios from "axios";
+
+
+
+const handleSeeAllFiles = () => {
+  // window.open("/uploads", "_blank"); // Open a new tab with the "/files" route
+
+  // // Perform an Axios GET request to fetch data from the backend
+  // axios.get('http://localhost:5000/uploads/1704648126214.pdf')
+  //   .then((response) => {
+  //     // Handle the fetched data as needed
+  //     console.log(response.data);
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error fetching data:", error);
+  //   });
+  alert("Check Local File Upload Folder");
+};
+
 
 // components
 
@@ -16,9 +35,9 @@ export default function CardSocialTraffic() {
             <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
               <button
                 className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
+                type="button" onClick={handleSeeAllFiles}
               >
-                See all
+                See all Files
               </button>
             </div>
           </div>
